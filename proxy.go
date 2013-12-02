@@ -1,10 +1,10 @@
-package main 
+package main
 import (
     "log"
     "net/url"
     "net/http"
     "net/http/httputil"
-    ) 
+    )
 func NewSingleHostReverseProxy(url *url.URL) *httputil.ReverseProxy {
   rp := httputil.NewSingleHostReverseProxy(url)
   oldDirector := rp.Director
