@@ -3,41 +3,71 @@ import (
   "fmt"
   "github.com/ntns/goitertools/itertools"
 )
-const 颜色 = 0
-const 国籍 = 1
-const 宠物 = 2
-const 饮料 = 3
-const 香烟 = 4
+const (
+  颜色 = iota
+  国籍
+  宠物
+  饮料
+  香烟
+)
+const (
+  德国 = iota
+  英国
+  瑞典
+  丹麦
+  挪威
+)
 
-const 德国 = 0
-const 英国 = 1
-const 瑞典 = 2
-const 丹麦 = 3
-const 挪威 = 4
+var 国籍Lookup = map[int]string {
+  德国: "德国",
+  英国: "英国",
+  瑞典: "瑞典",
+  丹麦: "丹麦",
+  挪威: "挪威",
+}
+const (
+  蓝色 = iota
+  红色
+  绿色
+  白色
+  黄色
+)
+var 颜色Lookup = map[int]string {
+  蓝色: "蓝色",
+  红色: "红色",
+  绿色: "绿色",
+  白色: "白色",
+  黄色: "黄色",
+}
+const (
+  鱼 = iota
+  狗
+  鸟
+  马
+  猫
+)
 
-const 蓝色 = 0
-const 红色 = 1
-const 绿色 = 2
-const 白色 = 3
-const 黄色 = 4
-
-const 鱼 = 0
-const 狗 = 1
-const 鸟 = 2
-const 马 = 3
-const 猫 = 4
-
-const 水 = 0
-const 茶 = 1
-const 咖啡 = 2
-const 牛奶 = 3
-const 啤酒 = 4
-
-const Prince = 0
-const PallMall = 1
-const Dunhill = 2
-const BlueMaster = 3
-const Blends = 4
+const (
+  水 = iota
+  茶
+  咖啡
+  牛奶
+  啤酒
+)
+var 饮料Lookup = map[int]string {
+  水: "水",
+  茶: "茶",
+  咖啡: "咖啡",
+  牛奶: "牛奶",
+  啤酒: "啤酒",
+}
+const (
+  Prince = iota
+  PallMall
+  Dunhill
+  BlueMaster
+  Blends
+)
 /*
 初始化
 */
@@ -95,7 +125,8 @@ func check4(house [][]int) bool{
       w = i
     }
   }
-  return g < w
+  //TODO 左侧有错，需要检查
+  return g + 1 == w
 }
 //  fmt.Println("5、绿色房子主人喝咖啡 ")
 func check5(house [][]int) bool{
@@ -265,17 +296,20 @@ func check(house [][]int) bool{
   fmt.Println("计算出结果..")
   for i := 0; i < 5; i++{
     if house[i][宠物] == 鱼{
-      fmt.Printf(
-        "第%d个%d房子里面喝%d抽%d的%d人养鱼",
-        i+1,
-        house[i][颜色],
-        house[i][饮料],
-        house[i][香烟],
-        house[i][国籍],
-      )
+      out(i, house[i])
     }
   }
   return true
+}
+func out(i int, house []int){
+  fmt.Printf(
+    "第%d个%s房子里面喝%s抽%d的%s人养鱼",
+    i+1,
+    颜色Lookup[house[颜色]],
+    饮料Lookup[house[饮料]],
+    house[香烟],
+    国籍Lookup[house[国籍]],
+  )
 }
 func run(){
   var house = 初始化()
@@ -306,6 +340,7 @@ func run(){
             }
             if check(house){
               fmt.Println("成功")
+              return
             }
           }
         }
