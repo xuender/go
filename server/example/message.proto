@@ -1,0 +1,7 @@
+syntax = "proto3";
+package example;
+message Message {
+	bool Success = 1;
+	string Error = 2;
+	string Data = 3;
+}
