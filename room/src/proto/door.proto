@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message Door {
+	int32 type = 1;
+	bool success = 2;
+	string error = 3;
+	User user = 11;
+}
+
+message User {
+	string nick = 1;
+	string token = 2;
+}
+

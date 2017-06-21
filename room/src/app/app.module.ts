@@ -8,8 +8,8 @@ import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { LoginProvider } from '../providers/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
+import { RoomProvider } from '../providers/room/room';
 
 @NgModule({
 	declarations: [
@@ -32,7 +32,7 @@ import { LoginPageModule } from '../pages/login/login.module';
 		StatusBar,
 		SplashScreen,
 		{provide: ErrorHandler, useClass: IonicErrorHandler},
-		LoginProvider
+		RoomProvider
 	]
 })
 export class AppModule {}

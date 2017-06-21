@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/xuender/goutils"
 
-	"./example"
+	"./door"
 )
 
 var wsupgrader = websocket.Upgrader{
@@ -51,9 +51,10 @@ func wsHandler(w http.ResponseWriter, r *http.Request) error {
 	goutils.CheckError(err)
 	go func() {
 		for {
-			msg := &example.Message{
+			msg := &door.Door{
+				Type:    1,
 				Success: true,
-				Data:    "测试数据",
+				Error:   "测试数据 ^_^",
 			}
 			data, _ := proto.Marshal(msg)
 			if conn.WriteMessage(websocket.BinaryMessage, data) != nil {
@@ -64,9 +65,12 @@ func wsHandler(w http.ResponseWriter, r *http.Request) error {
 	}()
 	for {
 		// err := conn.ReadJSON(&t)
-		_, _, err := conn.ReadMessage()
+		messageType, p, err := conn.ReadMessage()
 		if err != nil {
 			break
+		}
+		if err = conn.WriteMessage(messageType, p); err != nil {
+			return err
 		}
 	}
 	return nil
