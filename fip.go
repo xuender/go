@@ -3,10 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/axgle/ip"
 	"io"
 	"os"
 	"strings"
+
+	"github.com/axgle/ip"
 )
 
 func ReadLine(fileName string, handler func(string)) error {
@@ -26,7 +27,6 @@ func ReadLine(fileName string, handler func(string)) error {
 			return err
 		}
 	}
-	return nil
 }
 
 var ips map[string]string
@@ -39,6 +39,14 @@ func read(line string) {
 }
 
 func main() {
+	ip.Load("./17monipdb.dat")
+	fmt.Println(ip.Find("8.8.8.8"))
+	fmt.Println(ip.Find("202.106.46.151"))
+	fmt.Println(ip.Find("202.115.128.64"))
+
+}
+
+func old() {
 	ips = make(map[string]string)
 	for _, a := range os.Args[1:] {
 		ReadLine(a, read)
