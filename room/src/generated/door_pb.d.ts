@@ -1,22 +1,19 @@
-// package: 
+// package: door
 // file: door.proto
 
 import * as jspb from "google-protobuf";
 
 export class Door extends jspb.Message {
-  getType(): number;
-  setType(value: number): void;
+  getPath(): string;
+  setPath(value: string): void;
 
-  getSuccess(): boolean;
-  setSuccess(value: boolean): void;
+  getMethod(): MethodEnum;
+  setMethod(value: MethodEnum): void;
 
-  getError(): string;
-  setError(value: string): void;
-
-  hasUser(): boolean;
-  clearUser(): void;
-  getUser(): User | undefined;
-  setUser(value?: User): void;
+  getData(): Uint8Array | string;
+  getData_asU8(): Uint8Array;
+  getData_asB64(): string;
+  setData(value: Uint8Array | string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Door.AsObject;
@@ -30,34 +27,16 @@ export class Door extends jspb.Message {
 
 export namespace Door {
   export type AsObject = {
-    type: number,
-    success: boolean,
-    error: string,
-    user?: User.AsObject,
+    path: string,
+    method: MethodEnum,
+    data: Uint8Array | string,
   }
 }
 
-export class User extends jspb.Message {
-  getNick(): string;
-  setNick(value: string): void;
-
-  getToken(): string;
-  setToken(value: string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): User.AsObject;
-  static toObject(includeInstance: boolean, msg: User): User.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: User, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): User;
-  static deserializeBinaryFromReader(message: User, reader: jspb.BinaryReader): User;
-}
-
-export namespace User {
-  export type AsObject = {
-    nick: string,
-    token: string,
-  }
+export enum MethodEnum {
+  GET = 0,
+  POST = 1,
+  PUT = 2,
+  DELETE = 3,
 }
 

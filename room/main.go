@@ -52,9 +52,8 @@ func wsHandler(w http.ResponseWriter, r *http.Request) error {
 	go func() {
 		for {
 			msg := &door.Door{
-				Type:    1,
-				Success: true,
-				Error:   "测试数据 ^_^",
+				Path:   "login",
+				Method: door.MethodEnum_GET,
 			}
 			data, _ := proto.Marshal(msg)
 			if conn.WriteMessage(websocket.BinaryMessage, data) != nil {
