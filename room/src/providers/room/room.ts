@@ -10,11 +10,15 @@ export class RoomProvider {
 		this.ws = new $WebSocket('ws://localhost:8888/ws');
 		this.ws.onMessage((msg: MessageEvent) => {
 			console.log('onMessage', msg.data);
-			let a=new Uint8Array(msg.data.parts);
-			console.log('door a', a);
-			const d = Door.deserializeBinary(a);
-			console.log('door', d);
-			console.log('door', d.toObject());
+			const reader = new FileReader();
+			reader.readAsArrayBuffer(msg.data);
+			reader.onload = function (e) {
+				const buf = new Uint8Array(reader.result);
+				const d = Door.deserializeBinary(buf);
+				console.log('door', d);
+				const w = d.toObject();
+				console.log('door', w);
+			}
 		}, {autoApply: false});
 		console.log('Hello RoomProvider Provider');
 	}
