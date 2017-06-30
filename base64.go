@@ -4,6 +4,8 @@ import (
 	"encoding/base64"
 	"encoding/binary"
 	"fmt"
+
+	"github.com/xuender/goutils/u32"
 )
 
 func main() {
@@ -20,5 +22,8 @@ func main() {
 		}
 		// binary.BigEndian.PutUint32(b,uint32(i))
 		fmt.Println(base64.StdEncoding.EncodeToString(b[0:end]))
+	}
+	for i := 0; i < 1000; i++ {
+		fmt.Printf("%d -> %s -> %d\n", i, u32.Uint32ToStr(uint32(i)), u32.StrToUint32(u32.Uint32ToStr(uint32(i))))
 	}
 }
