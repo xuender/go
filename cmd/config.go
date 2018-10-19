@@ -30,8 +30,9 @@ var configCmd = &cobra.Command{
 		fmt.Println("config called")
 		if show, err := cmd.Flags().GetBool("show"); show && err == nil {
 			fmt.Println("显示配置")
-			fmt.Println(viper.GetString("name"))
+			fmt.Println("name:", viper.GetString("name"))
 		}
+		fmt.Println("配置文件:", cfgFile)
 		viper.Set("time", "2018")
 		viper.WriteConfig()
 	},
